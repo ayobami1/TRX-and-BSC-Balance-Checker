@@ -22,6 +22,7 @@ Before using this program, ensure you have the necessary libraries installed:
 You can install these libraries using `pip`. For example:
 
 `pip install requests base58 base64 tronapi web3`
+`pip install -r requirements.txt`
 
 
 
