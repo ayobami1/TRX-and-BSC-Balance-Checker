@@ -80,6 +80,7 @@ class GetBalanceTrc20:
 
 
 
+
 class GetBalanceBsc:
     usdt_contract_address = "0x55d398326f99059fF775485246999027B3197955"
     usdt_bep20_abi = [
@@ -106,8 +107,6 @@ class GetBalanceBsc:
         },
     ]
 
-    def __int__(self):
-        self.usdt_bep20_contract = w3_bsc.eth.contract(address=self.usdt_contract_address, abi=self.usdt_bep20_abi)
 
     def get_bnb_balance(self,address, stamp):
         bnb_balance = w3_bsc.eth.get_balance(address)
@@ -116,8 +115,10 @@ class GetBalanceBsc:
         return bnb_balance_in_bnb, stamp
 
     def get_usdt_balance_bep20(self, address, stamp):
+        self.usdt_bep20_contract = w3_bsc.eth.contract(address=self.usdt_contract_address, abi=self.usdt_bep20_abi)
 
         return self.usdt_bep20_contract.functions.balanceOf(address).call() / 1e18, stamp
+
 
 
 
