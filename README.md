@@ -57,7 +57,7 @@ print(f'USDT balance: {usdt_balance} USDT')
 ```
 Make sure to replace 'Your_Crypto_Address_Here' with the actual cryptocurrency address you want to check.
 
-you can check example and see how is being used
+you can check [The Example Usage here for both TRC and BSC](https://github.com/ayobami1/TRX-and-BSC-Balance-Checker/tree/main/Example) and see how is being used
 
 
 
