@@ -35,24 +35,32 @@ You can use this program to check cryptocurrency balances on the TRON and Binanc
 from datetime import datetime
 from pycryptchecker import GetBalanceTrc20, GetBalanceBsc
 
-# Set the cryptocurrency address you want to check
-ADDRESS = 'Your_Crypto_Address_Here'
+
 
 # Get the current date as a timestamp
 current_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
+#USAGE FOR TRC20
+
+# Set the cryptocurrency address you want to check
+TRC_ADDRESS = 'Your_Crypto_Address_Here'
+
 # Check TRX balance
-GetBalanceTrc20().get_trx_balance(ADDRESS)
+GetBalanceTrc20().get_trx_balance(ADDRESS=TRC_ADDRESS)
 
 # Check USDT balance on TRON network
-GetBalanceTrc20().get_usdt_balance(ADDRESS)
+GetBalanceTrc20().get_usdt_balance(ADDRESS=TRC_ADDRESS)
+
+#USAGE FOR BSC
+# Set the cryptocurrency address you want to check
+BNB_ADDRESS = 'Your_Crypto_Address_Here'
 
 # Check BNB balance on Binance Smart Chain
-bnb_balance, stamp = GetBalanceBsc().get_bnb_balance(address=ADDRESS, stamp=current_date)
+bnb_balance, stamp = GetBalanceBsc().get_bnb_balance(address=BNB_ADDRESS, stamp=current_date)
 print(f'BNB balance: {bnb_balance} BNB')
 
 # Check USDT (BEP20) balance on Binance Smart Chain
-usdt_balance, stamp = GetBalanceBsc().get_usdt_balance_bep20(address=ADDRESS, stamp=current_date)
+usdt_balance, stamp = GetBalanceBsc().get_usdt_balance_bep20(address=BNB_ADDRESS, stamp=current_date)
 print(f'USDT balance: {usdt_balance} USDT')
 ```
 Make sure to replace 'Your_Crypto_Address_Here' with the actual cryptocurrency address you want to check.
