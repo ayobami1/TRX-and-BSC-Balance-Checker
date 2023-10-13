@@ -21,10 +21,14 @@ jobs:
     - name: Install dependencies
       run: pip install .
 
-    - name: Build and publish
-      run: |
-        python setup.py sdist
-        twine upload dist/*
+    - name: Build distribution
+      run: python setup.py sdist
+
+    - name: Install twine
+      run: pip install twine
+
+    - name: Publish to PyPI
+      run: twine upload dist/*
 
     - name: Clean up
       run: |
