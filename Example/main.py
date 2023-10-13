@@ -14,7 +14,6 @@ w3_bsc = Web3(Web3.HTTPProvider(bsc_rpc_url))
 
 
 CONTRACT = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"  # USDT
-ADDRESS ='TMDCtzCUVBHtLQQmZEis1osCQgbVsCELDF'
 "main net"
 API_URL_BASE = 'https://api.trongrid.io/'
 
@@ -29,7 +28,6 @@ DEFAULT_FEE_LIMIT =1_000_000  # 1 TRX
 #Get the current data as stamp
 
 current_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
 class GetBalanceTrc20:
 
 
@@ -38,7 +36,7 @@ class GetBalanceTrc20:
         return "0" * 24 + base58.b58decode_check(addr)[1:].hex()
 
     def get_usdt_balance(self, address=ADDRESS):
-        print("ADDRESS : " , ADDRESS)
+        # print("ADDRESS : " , ADDRESS)
         url = API_URL_BASE + 'wallet/triggerconstantcontract'
         payload = {
             'owner_address': base58.b58decode_check(ADDRESS).hex(),
@@ -55,9 +53,11 @@ class GetBalanceTrc20:
             decimals = 6
             float_balance = int_balance / (10 ** decimals)
 
-            print('USDT balance =', float_balance)
+            #print('USDT balance =', float_balance)
+            return float_balance
         else:
-            print('error:', bytes.fromhex(data['result']['message']).decode())
+            #print('error:', bytes.fromhex(data['result']['message']).decode())
+            return bytes.fromhex(data['result']['message']).decode()
 
 
     def get_trx_balance(self, address=ADDRESS):
@@ -70,12 +70,11 @@ class GetBalanceTrc20:
 
         if data.get('balance', None):
             trx_balance = int(data['balance']) / (10 ** 6)
-            print('TRX balance =', trx_balance)
+            #print('TRX balance =', trx_balance)
+            return trx_balance
         else:
-            print('Error:', data.get('error_message', 'Unknown error'))
-
-
-
+            # print('Error:', data.get('error_message', 'Unknown error'))
+            return 'Unknown error'
 
 class GetBalanceBsc:
     usdt_contract_address = "0x55d398326f99059fF775485246999027B3197955"
@@ -117,15 +116,14 @@ class GetBalanceBsc:
 
 
 
+#Usage for BSC
+bsc_balance = GetBalanceBsc()
+address = '0x99F427c0544CD7E9F66b349A2E4A274066d264Ea'
+print(bsc_balance.get_bnb_balance(address=address, stamp=current_date))
+print(bsc_balance.get_usdt_balance_bep20(address=address, stamp=current_date))
 
+# Usage FOR TRC
+ADDRESS = 'TMDCtzCUVBHtLQQmZEis1osCQgbVsCELDF'
+print(GetBalanceTrc20().get_trx_balance(ADDRESS))
 
-
-#Get the Bsc Chain balance 
-print(GetBalanceBsc().get_bnb_balance(address='0x99F427c0544CD7E9F66b349A2E4A274066d264Ea', stamp=current_date))
-print(GetBalanceB)
-
-
-# Usage For Trc20
-GetBalanceTrc20().get_trx_balance(ADDRESS)
-
-GetBalanceTrc20().get_usdt_balance(ADDRESS)
+print(GetBalanceTrc20().get_usdt_balance(ADDRESS))
