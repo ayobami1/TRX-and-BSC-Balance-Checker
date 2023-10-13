@@ -35,7 +35,7 @@ class GetBalanceTrc20:
     def address_to_parameter(self, addr):
         return "0" * 24 + base58.b58decode_check(addr)[1:].hex()
 
-    def get_usdt_balance(self, address=ADDRESS):
+    def get_usdt_balance(self, address):
         # print("ADDRESS : " , ADDRESS)
         url = API_URL_BASE + 'wallet/triggerconstantcontract'
         payload = {
@@ -60,7 +60,7 @@ class GetBalanceTrc20:
             return bytes.fromhex(data['result']['message']).decode()
 
 
-    def get_trx_balance(self, address=ADDRESS):
+    def get_trx_balance(self, address):
         url = API_URL_BASE + 'wallet/getaccount'
         payload = {
             'address': base58.b58decode_check(address).hex(),
