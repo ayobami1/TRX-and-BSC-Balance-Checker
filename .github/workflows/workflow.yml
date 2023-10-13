@@ -1,0 +1,31 @@
+name: Publish to PyPI
+
+on:
+  push:
+    branches:
+      - main  # Change this to match your main branch name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8  # Change to your preferred Python version
+
+    - name: Install dependencies
+      run: pip install .
+
+    - name: Build and publish
+      run: |
+        python setup.py sdist
+        twine upload dist/*
+
+    - name: Clean up
+      run: |
+        rm -rf dist
