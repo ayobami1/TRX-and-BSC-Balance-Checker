@@ -6,12 +6,13 @@ setup(
     description='Trx and Bsc Wrapper',
     author='Your Name',
     author_email='your@email.com',
-    url='https://github.com/yourusername/your-package-name',
+    url='https://github.com/ayobami1/TRX-and-BSC-Balance-Checker.git',
     packages=find_packages(),
     install_requires=[
         'requests',
         'base58',
-        # Add other dependencies here
+        'base64',
+        'web3'
     ],
     classifiers=[
         'License :: OSI Approved :: MIT License',
