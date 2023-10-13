@@ -33,7 +33,7 @@ You can use this program to check cryptocurrency balances on the TRON and Binanc
 ```python
 # Import the necessary classes
 from datetime import datetime
-from your_module import GetBalanceTrc20, GetBalanceBsc
+from pycryptchecker import GetBalanceTrc20, GetBalanceBsc
 
 # Set the cryptocurrency address you want to check
 ADDRESS = 'Your_Crypto_Address_Here'
