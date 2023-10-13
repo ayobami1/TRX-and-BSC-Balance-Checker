@@ -14,7 +14,6 @@ w3_bsc = Web3(Web3.HTTPProvider(bsc_rpc_url))
 
 
 CONTRACT = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"  # USDT
-ADDRESS ='TMDCtzCUVBHtLQQmZEis1osCQgbVsCELDF'
 "main net"
 API_URL_BASE = 'https://api.trongrid.io/'
 
@@ -29,7 +28,6 @@ DEFAULT_FEE_LIMIT =1_000_000  # 1 TRX
 #Get the current data as stamp
 
 current_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
 class GetBalanceTrc20:
 
 
@@ -38,7 +36,7 @@ class GetBalanceTrc20:
         return "0" * 24 + base58.b58decode_check(addr)[1:].hex()
 
     def get_usdt_balance(self, address=ADDRESS):
-        print("ADDRESS : " , ADDRESS)
+        # print("ADDRESS : " , ADDRESS)
         url = API_URL_BASE + 'wallet/triggerconstantcontract'
         payload = {
             'owner_address': base58.b58decode_check(ADDRESS).hex(),
@@ -75,11 +73,8 @@ class GetBalanceTrc20:
             #print('TRX balance =', trx_balance)
             return trx_balance
         else:
-            print('Error:', data.get('error_message', 'Unknown error'))
+            # print('Error:', data.get('error_message', 'Unknown error'))
             return 'Unknown error'
-
-
-
 
 class GetBalanceBsc:
     usdt_contract_address = "0x55d398326f99059fF775485246999027B3197955"
@@ -118,8 +113,6 @@ class GetBalanceBsc:
         self.usdt_bep20_contract = w3_bsc.eth.contract(address=self.usdt_contract_address, abi=self.usdt_bep20_abi)
 
         return self.usdt_bep20_contract.functions.balanceOf(address).call() / 1e18, stamp
-
-
 
 
 
